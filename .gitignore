@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Poetry
+poetry.lock.bak
+
+# Test & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Secrets - NUNCA versionar
+.env
+.env.*
+*.key
+*.pem
+secrets/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "eps-2026-2"
+version = "0.1.0"
+description = "Onboarding SecOps - Engenharia de Produto de Software FGA0316"
+authors = ["Your Name <your@email.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.group.dev.dependencies]
+bandit = "^1.8"
+safety = "^3.3"
+ruff = "^0.9"
+pytest = "^8.3"
+pytest-cov = "^6.0"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.bandit]
+exclude_dirs = [".venv", "tests"]
+skips = []
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

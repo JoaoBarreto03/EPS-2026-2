@@ -1,0 +1,52 @@
+name: Security Gate - CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  security-gate:
+    name: Auditoria e Qualidade
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: latest
+          virtualenvs-in-project: true
+
+      - name: Cache do .venv
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            venv-${{ runner.os }}-
+
+      - name: Instalar dependências
+        run: poetry install --no-interaction
+
+      - name: "[1/4] Ruff - Qualidade e Conformidade"
+        run: poetry run ruff check .
+
+      - name: "[2/4] Bandit - Auditoria Estática (SAST)"
+        run: poetry run bandit -r src/ -ll
+
+      - name: "[3/4] Safety - Verificação de CVEs em Dependências"
+        run: poetry run safety scan
+        env:
+          SAFETY_API_KEY: ${{ secrets.SAFETY_API_KEY }}
+
+      - name: "[4/4] Pytest - Testes Automatizados com Cobertura"
+        run: poetry run pytest tests/ --cov=src --cov-report=term-missing --cov-fail-under=0
