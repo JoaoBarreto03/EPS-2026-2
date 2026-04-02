@@ -1,7 +1,7 @@
 # Relatório de Prontidão Técnica: Onboarding SecOps
 
 **Disciplina:** Engenharia de Produto de Software (FGA0316) - 2026.1
-**Aluno:** [Nome Completo] | **Matrícula:** [00/0000000]
+**Aluno:** João Manoel Barreto Neto | **Matrícula:** 211039519
 
 ---
 
@@ -32,15 +32,37 @@ Abaixo constam os resumos das execuções dos comandos de segurança:
 *Comando: `poetry run bandit -r .`*
 
 ```
-[cole aqui o output completo do Bandit]
+Run started:2026-04-01 23:51:12.404137+00:00
 
-Resultado esperado:
-No issues identified.
 Test results:
-    No issues found.
+>> Issue: [B101:assert_used] Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html
+   Location: ./tests/test_placeholder.py:3:4
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 3
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 1
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 1
+Files skipped (0):
 ```
 
-> Vulnerabilidades encontradas: **0**
+> Vulnerabilidades encontradas: **0 críticas / 0 médias / 1 baixa** (uso de `assert` em arquivo de teste — comportamento esperado em suítes de teste com `pytest`)
 
 ---
 
@@ -49,10 +71,18 @@ Test results:
 *Comando: `poetry run safety check`*
 
 ```
-[cole aqui o output completo do Safety]
+Safety v3.7.0 is scanning for Vulnerabilities...
+Scanning dependencies in your environment:
 
-Resultado esperado:
-No known security vulnerabilities found.
+  -> .venv/lib/python3.12/site-packages
+
+  Using open-source vulnerability database
+  Found and scanned 51 packages
+  Timestamp 2026-04-01 21:01:23
+  0 vulnerabilities reported
+  0 vulnerabilities ignored
+
+No known security vulnerabilities reported.
 ```
 
 ---
@@ -62,9 +92,6 @@ No known security vulnerabilities found.
 *Comando: `poetry run ruff check .`*
 
 ```
-[cole aqui o output completo do Ruff]
-
-Resultado esperado:
 All checks passed!
 ```
 
@@ -74,20 +101,17 @@ All checks passed!
 
 O pipeline automatizado foi executado com sucesso no GitHub Actions:
 
-- **Link da Action de Sucesso:** [COLE AQUI O LINK DO SEU GITHUB ACTIONS]
-
-> Exemplo de formato esperado:
-> `https://github.com/<seu-usuario>/EPS-2026-2/actions/runs/<run-id>`
+- **Link da Action de Sucesso:** https://github.com/JoaoBarreto03/EPS-2026-2/actions/runs/23876438179
 
 ---
 
 ## 4. Declaração de Soberania Técnica (CISSP Domain 8)
 
-Eu, [Nome do Aluno], declaro que auditei manualmente as ferramentas e dependências deste projeto. Confirmo que o código gerado via IA (GitHub Copilot) passou pela minha revisão humana (*Human-in-the-loop*), garantindo que não há vazamento de segredos ou falhas lógicas críticas antes da migração para o ecossistema da PCDF.
+Eu, João Manoel Barreto Neto, declaro que auditei manualmente as ferramentas e dependências deste projeto. Confirmo que o código gerado via IA (GitHub Copilot) passou pela minha revisão humana (*Human-in-the-loop*), garantindo que não há vazamento de segredos ou falhas lógicas críticas antes da migração para o ecossistema da PCDF.
 
 ---
 
-**Data de Entrega:** [DD/MM/2026]
+**Data de Entrega:** 01/04/2026
 
 ---
 

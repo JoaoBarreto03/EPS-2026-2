@@ -3,7 +3,10 @@
     "allow": [
       "Bash(pip install:*)",
       "Bash(poetry --version)",
-      "Bash(poetry config:*)"
+      "Bash(poetry config:*)",
+      "Bash(.venv/bin/ruff check:*)",
+      "Bash(gh run:*)",
+      "Bash(.venv/bin/bandit -r . --exclude ./.venv)"
     ]
   }
 }
